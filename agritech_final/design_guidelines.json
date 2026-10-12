@@ -1,0 +1,192 @@
+{
+  "app_name": "AquaCrop AI",
+  "personality": "7 Dark-First Utility (Earthy Variant)",
+  "personality_one_liner": "A highly readable, operational command center for farmers, grounded in deep earth tones with high-visibility amber alerts.",
+  "color": {
+    "surface": "#0E140D",
+    "onSurface": "#F3F4F0",
+    "surfaceSecondary": "#1A2318",
+    "onSurfaceSecondary": "#E1E4DB",
+    "surfaceTertiary": "#263322",
+    "onSurfaceTertiary": "#D3D9CA",
+    "surfaceInverse": "#F3F4F0",
+    "onSurfaceInverse": "#0E140D",
+    "brand": "#D97706",
+    "onBrand": "#FFFFFF",
+    "brandPrimary": "#EA580C",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#F59E0B",
+    "onBrandSecondary": "#3D1F00",
+    "brandTertiary": "#3E2A12",
+    "onBrandTertiary": "#FCD34D",
+    "success": "#22C55E",
+    "onSuccess": "#000000",
+    "warning": "#F59E0B",
+    "onWarning": "#000000",
+    "error": "#EF4444",
+    "onError": "#FFFFFF",
+    "info": "#A8A29E",
+    "onInfo": "#000000",
+    "border": "#263322",
+    "borderStrong": "#44593C",
+    "divider": "#1A2318",
+    "muted": "#9CA3AF"
+  },
+  "typography": {
+    "displayFontFamily": "DM Sans",
+    "textFontFamily": "DM Sans",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Generous touch targets and padding. Never cramp cards. Maintain breathable margins for outdoor readability.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 6,
+    "md": 12,
+    "lg": 20,
+    "pill": 999
+  },
+  "shadow_tier": "0",
+  "navigation": "bottom_tabs",
+  "icon_set": "MaterialCommunityIcons",
+  "glassmorphism": {
+    "enabled": false,
+    "do's": [
+      "Use solid surfaceSecondary and tonal differences instead of glass for maximum readability outdoors."
+    ],
+    "dont's": [
+      "No blur or glass on data cards, no translucency that reduces contrast in sunlight."
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-blur",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "LanguageSelection",
+      "purpose": "First-launch screen to set the app language (English, Telugu, Hindi).",
+      "states": {
+        "loading": "Centered spinner",
+        "empty": "N/A",
+        "error": "Standard retry"
+      },
+      "layout": "Centered logo at the top. 3 large, full-width selectable cards (surfaceSecondary) for each language. A sticky 'Continue' button (brandPrimary) pinned at the bottom with safe-area clearance."
+    },
+    {
+      "name": "HomeDashboard",
+      "purpose": "Glanceable overview of GPS location, weather, soil NPK, and groundwater status.",
+      "states": {
+        "loading": "Skeleton loaders for cards",
+        "empty": "No farm data set up",
+        "error": "Failed to load dashboard data, Retry button"
+      },
+      "layout": "Vertical scroll. 1. Hero Card: Location & Weather with the 'Indian farmer' photo as background + top-to-bottom dark gradient scrim + text overlay. 2. 2-column grid for Soil NPK and Groundwater Status cards. 3. 'Top Recommended Crop' highlighted card (spanning full width). 4. Quick Actions for 'Advisory Invoice' and 'Comparison'."
+    },
+    {
+      "name": "CropRecommendations",
+      "purpose": "List top 5 ML-recommended crops with suitability, water demand, and voice read-out.",
+      "states": {
+        "loading": "List of skeleton cards",
+        "empty": "No recommendations available for current soil/water.",
+        "error": "Failed to load ML recommendations."
+      },
+      "layout": "List of 5 large vertical cards. Each card has: Top 40% crop photo cover with gradient scrim + Rank/Medal badge. Bottom 60% text content: Crop Name, Suitability Score (/100), Water Demand & Groundwater Risk chips (using status colors: success/warning/error), ML Confidence progress bar, 'Why this crop' text, and a prominent '🔊 Voice Read Recommendation' button in brandPrimary."
+    },
+    {
+      "name": "Compare",
+      "purpose": "Detailed historical groundwater trends and with vs. without groundwater comparison.",
+      "states": {
+        "loading": "Chart skeletons",
+        "empty": "No historical groundwater data available.",
+        "error": "Failed to load analytics."
+      },
+      "layout": "Vertical scroll. 1. Groundwater Detail card: Status badge (Depleting=red, Stable=amber, Improving=green), mbgl metric, and a line chart (2021-2023). 2. Comparison Section: Grouped bar chart comparing yields/suitability 'With vs Without Groundwater', a list showing rank changes, and a short textual explanation card."
+    },
+    {
+      "name": "AdvisoryInvoice",
+      "purpose": "Elegant shareable summary of the crop recommendation.",
+      "states": {
+        "loading": "Generating PDF...",
+        "empty": "No advisory generated yet.",
+        "error": "Failed to load advisory details."
+      },
+      "layout": "Full-screen modal or dedicated screen. Header says 'Crop Recommendation Advisory'. Content is styled like a clean, receipt-like list (using surfaceSecondary rows) detailing the farm parameters and top 3 crops. Sticky 'Download PDF / Share' CTA at the bottom."
+    },
+    {
+      "name": "Settings",
+      "purpose": "App configuration including Language change, Voice toggle, and Methodology info.",
+      "states": {
+        "loading": "N/A",
+        "empty": "N/A",
+        "error": "N/A"
+      },
+      "layout": "List layout. Rows use a tinted icon container (brandTertiary rounded square) on the left, title, and trailing control (chevron or Switch). Include 'Change Language', 'Voice Read Toggle', 'Data Sources', and 'About/Methodology' which pushes to a text-heavy methodology screen."
+    },
+    {
+      "name": "AboutMethodology",
+      "purpose": "Explain the ML models (Random Forest + XGBoost) and feature importance.",
+      "states": {
+        "loading": "N/A",
+        "empty": "N/A",
+        "error": "N/A"
+      },
+      "layout": "Text-heavy scrolling screen with typography-driven hierarchy. Include simple horizontal bar charts representing 'Feature Importance' (e.g., Soil Moisture: 35%, NPK: 25%, etc.)."
+    }
+  ],
+  "images": {
+    "hero_farmer_bg": {
+      "url": "https://images.unsplash.com/photo-1620901433789-1d2f85a93653?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjBmYXJtZXIlMjBkYXJrJTIwYXRtb3NwaGVyaWN8ZW58MHx8fHwxNzg5MTY4MDg1fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Farmer plowing field under moody sky"
+    },
+    "crop_rice": {
+      "url": "https://images.unsplash.com/photo-1592997571659-0b21ff64313b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTZ8MHwxfHNlYXJjaHwxfHxyaWNlJTIwZmllbGQlMjBkYXJrJTIwYXRtb3NwaGVyaWN8ZW58MHx8fHwxNzg5MTY4MDg1fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Close up of rice plant in dark atmospheric light"
+    },
+    "crop_wheat": {
+      "url": "https://images.unsplash.com/photo-1616514356967-84b821175c8d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwxfHx3aGVhdCUyMGNyb3AlMjBmYXJtJTIwZGFya3xlbnwwfHx8fDE3ODkxNjgwODV8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Wheat crop in the field"
+    }
+  },
+  "haptics": {
+    "events": {
+      "primary_button_press": "impactMedium",
+      "tab_change": "selection",
+      "language_select": "impactLight",
+      "voice_read_toggle": "impactLight",
+      "card_tap": "impactLight"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Strictly follow the Dark-First Utility guidelines customized for this deep earthy palette. Never use generic dark mode greys; always use the provided surface hexes (e.g., #0E140D).",
+    "When placing text over the hero image or crop images, you MUST use a vertical gradient scrim (transparent -> ~20% surfaceInverse -> >=70% surfaceInverse) to ensure text contrast passes WCAG AA.",
+    "Implement charts (Line for groundwater, Grouped Bar for comparison) using react-native-chart-kit or victory-native. Ensure they are readable against the dark background.",
+    "For the 'Advisory Invoice', style it clearly as an advisory (like a receipt/report), preventing any perception that it is a bill.",
+    "Ensure 'Voice Read' buttons are large, prominent, and use the orange/amber accent (brandPrimary).",
+    "Use MaterialCommunityIcons (e.g., 'sprout', 'tractor', 'water', 'thermometer') for all domain-specific iconography.",
+    "Honor the status color requirements: green=improving, amber=stable, red=depleting.",
+    "Keep touch targets generous (minimum 44x44pt) as farmers may use the app outdoors with less precision.",
+    "Keep layout simple and modular. No glassmorphism as it degrades legibility in sunlight. Solid surfaces only."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "features": [
+    "n_score",
+    "p_score",
+    "k_score",
+    "temperature_score",
+    "humidity_score",
+    "ph_score",
+    "rainfall_score"
+  ],
+  "n_samples": 22,
+  "random_forest": {
+    "cv_mae": 0.1606,
+    "train_r2": 0.918,
+    "feature_importance": {
+      "n_score": 0.4121,
+      "p_score": 0.0521,
+      "k_score": 0.1755,
+      "temperature_score": 0.1194,
+      "humidity_score": 0.0441,
+      "ph_score": 0.0495,
+      "rainfall_score": 0.1472
+    }
+  },
+  "xgboost": {
+    "cv_mae": 0.1733,
+    "train_r2": 1.0,
+    "feature_importance": {
+      "n_score": 0.27889999747276306,
+      "p_score": 0.038100000470876694,
+      "k_score": 0.2418999969959259,
+      "temperature_score": 0.07609999924898148,
+      "humidity_score": 0.039500001817941666,
+      "ph_score": 0.03849999979138374,
+      "rainfall_score": 0.28690001368522644
+    }
+  },
+  "ensemble": {
+    "random_forest_weight": 0.4,
+    "xgboost_weight": 0.6
+  }
+}
